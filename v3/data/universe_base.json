@@ -1,6 +1,6 @@
 {
     "name": "/",
-    "explored": false,
+    "explored": true,
     "children": [
       {
         "name": "observable_universe",
