@@ -1,7 +1,1 @@
-### Frontend
-
-Next.js
-
-### Backend
-
-Express
+Next.js App Router
