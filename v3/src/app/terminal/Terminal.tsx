@@ -23,6 +23,7 @@ const commands: Record<string, Command> = {
 }
 
 async function runCommand(input: string, state: TerminalState) {
+    if (!input.trim()) return;
     const [cmd, ...args] = input.trim().split(" ");
     state.addHistory(`${input}`);
 
@@ -73,6 +74,7 @@ export default function Terminal() {
     
     function onSubmit(e: React.FormEvent) {
         e.preventDefault();
+        if (!input.trim()) return;
         runCommand(input, terminalState);
         setInput("");
     }
