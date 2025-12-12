@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import Logo from "@/app/ui/Logo";
+import Background from "@/app/ui/Background";
 import { useEffect, useState } from "react";
 
 interface HomeScreenProps {
@@ -27,15 +27,7 @@ export default function HomeScreen({ onNext }: HomeScreenProps) {
   }, [onNext]);
 
   return (
-    <div className="relative w-screen h-screen overflow-hidden">
-      <Image
-        src="/background.png"
-        alt="Background"
-        fill
-        className="object-cover image-pixelated"
-        priority
-      />
-      
+    <Background>
       <div className="absolute inset-0 flex items-center justify-center">
         <Logo />
       </div>
@@ -43,8 +35,7 @@ export default function HomeScreen({ onNext }: HomeScreenProps) {
       <p className="absolute bottom-60 w-full text-center text-[1.83rem]">
         <span className={loaded ? "blink" : ""}>PRESS [ ENTER ] TO BEGIN</span>
       </p>
-
-    </div>
+    </Background>
   );
 }
 

@@ -1,13 +1,16 @@
 "use client";
 
 import Terminal from "../terminal/Terminal";
+import Background from "../ui/Background";
 
 export default function TerminalScreen({ onNext }: { onNext: () => void }) {
     return (
-        <div className="flex items-center justify-center h-screen bg-black">
-            <div className="w-full max-w-[912px] aspect-[912/610] border-[3px] border-bone flex items-center justify-center overflow-hidden">
-                <Terminal />
+        <Background>
+            <div className="absolute inset-0 flex items-center justify-center">
+                <div className="border-[3px] border-bone aspect-[912/610] max-w-[912px] w-full overflow-hidden">
+                    <Terminal />
+                </div>
             </div>
-        </div>
+        </Background>
     );
 }
