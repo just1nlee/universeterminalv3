@@ -1,10 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { TerminalState, Node } from "./helper";
 import * as help from "./commands/help";
+import * as ls from "./commands/ls";
+import * as cd from "./commands/cd";
 import * as pwd from "./commands/pwd";
 import * as clear from "./commands/clear";
+import * as bigbang from "./commands/bigbang";
 
 type Command = {
     run: (args: string[], state: TerminalState) => void;
@@ -12,11 +15,14 @@ type Command = {
 
 const commands: Record<string, Command> = {
     help,
+    ls,
+    cd,
     pwd,
     clear,
+    bigbang,
 }
 
-function runCommand(input: string, state: TerminalState) {
+async function runCommand(input: string, state: TerminalState) {
     const [cmd, ...args] = input.trim().split(" ");
     state.addHistory(`${input}`);
 
@@ -26,7 +32,7 @@ function runCommand(input: string, state: TerminalState) {
         return;
     }
 
-    command.run(args, state);
+    await command.run(args, state);
 }
 
 export default function Terminal() {
@@ -35,7 +41,22 @@ export default function Terminal() {
         explored: true,
         children: [],
       });
-    const [currentPath, setCurrentPath] = useState<string[]>([]);
+    useEffect(() => {
+        (async () => {
+            try {
+                await fetch("/api/universe/reset", { method: "POST" });
+
+                const res = await fetch("/api/universe");
+                const data = await res.json();
+                setUniverse(data);
+            }
+            catch (error) {
+                console.error(error);
+            }
+        })();
+    }, []);
+
+    const [currentPath, setCurrentPath] = useState<string[]>(["/"]);
     const [history, setHistory] = useState<string[]>([]);
     const [input, setInput] = useState("");
 
