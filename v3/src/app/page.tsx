@@ -6,13 +6,11 @@ import BootScreen from "@/app/screens/BootScreen";
 import TerminalScreen from "@/app/screens/TerminalScreen";
 
 export default function Home() {
-    const [screen, setScreen] = useState<"home" | "boot" | "terminal">("terminal");
+    const [screen, setScreen] = useState<"home" | "terminal">("home");
 
     switch (screen) {
         case "home": 
-            return <HomeScreen onNext={() => setScreen("boot")} />;
-        case "boot":
-            return <BootScreen onNext={() => setScreen("terminal")} />;
+            return <HomeScreen onNext={() => setScreen("terminal")} />;
         case "terminal":
             return <TerminalScreen onNext={() => {
                 sessionStorage.clear();
