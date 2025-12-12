@@ -78,23 +78,24 @@ export default function Terminal() {
     }
 
     return (
-        <div>
-        {/* Output */}
-        <div>
-          {history.map((line, i) => (
-            <div key={i}>{line}</div>
-          ))}
-        </div>
-  
-        {/* Input */}
-        <form onSubmit={onSubmit}>
-          <span>$ </span>
-          <input
-            autoFocus
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-          />
-        </form>
-      </div>
+       <div className="flex flex-col h-full w-full bg-black text-bone">
+            <div className="flex-1 overflow-y-auto px-8 py-4 whitespace-pre-wrap text-lg leading-tight">
+                {history.map((line, i) => (
+                    <div key={i} className="mb-0.5">{line}</div>
+                ))}
+            </div>
+
+            <form onSubmit={onSubmit} className="px-8 py-4 border-t border-gray-800">
+                <div className="flex items-center text-lg">
+                    <span className="mr-2 text-bone">*</span>
+                    <input 
+                        autoFocus 
+                        className="flex-1 bg-transparent outline-none text-bone" 
+                        value={input} 
+                        onChange={(e) => setInput(e.target.value)} 
+                    />
+                </div>
+            </form>
+       </div>
     )
 }
