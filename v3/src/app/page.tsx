@@ -6,7 +6,7 @@ import BootScreen from "@/app/screens/BootScreen";
 import TerminalScreen from "@/app/screens/TerminalScreen";
 
 export default function Home() {
-    const [screen, setScreen] = useState<"home" | "boot" | "terminal">("home");
+    const [screen, setScreen] = useState<"home" | "boot" | "terminal">("terminal");
 
     switch (screen) {
         case "home": 
