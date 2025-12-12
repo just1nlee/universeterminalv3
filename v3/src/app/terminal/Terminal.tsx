@@ -8,6 +8,7 @@ import * as cd from "./commands/cd";
 import * as pwd from "./commands/pwd";
 import * as clear from "./commands/clear";
 import * as bigbang from "./commands/bigbang";
+import * as exit from "./commands/exit";
 
 type Command = {
     run: (args: string[], state: TerminalState) => void;
@@ -20,6 +21,7 @@ const commands: Record<string, Command> = {
     pwd,
     clear,
     bigbang,
+    exit,
 }
 
 async function runCommand(input: string, state: TerminalState) {
@@ -36,7 +38,7 @@ async function runCommand(input: string, state: TerminalState) {
     await command.run(args, state);
 }
 
-export default function Terminal() {
+export default function Terminal({ onNext }: { onNext: () => void }) {
     const [universe, setUniverse] = useState<Node>({
         name: "/",
         explored: true,
@@ -70,6 +72,7 @@ export default function Terminal() {
         addHistory: (line: string) =>
           setHistory((h) => [...h, line]),
         clearHistory: () => setHistory([]),
+        onNext,
     };
     
     function onSubmit(e: React.FormEvent) {

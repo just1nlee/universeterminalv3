@@ -12,6 +12,7 @@ export type TerminalState = {
     history: string[];
     addHistory: (line: string) => void;
     clearHistory: () => void;
+    onNext: () => void;
 }
 
 export function getNodeByPath(root: Node, path: string[]): Node | null {
