@@ -1,4 +1,4 @@
-### universeterminal
+### (ARCHIVED) universeterminalv3
 the **universeterminal** is a CLI emulator web application that allows you to explore a custom filesytem designed to simulate the scale of the universe. 
 
 ### Supported Commands
